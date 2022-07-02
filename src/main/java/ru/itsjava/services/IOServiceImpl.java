@@ -13,7 +13,9 @@ public class IOServiceImpl implements IOService {
 
     public IOServiceImpl(@Value("#{T(java.lang.System).in}") InputStream inputStream) {
         this.reader = new Scanner(inputStream);
+        System.out.println("Bean IOServiceImpl");
     }
+
 
     @SneakyThrows
     @Override
