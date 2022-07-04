@@ -16,7 +16,6 @@ public class IOServiceImpl implements IOService {
         System.out.println("Bean IOServiceImpl");
     }
 
-
     @SneakyThrows
     @Override
     public int input() {
