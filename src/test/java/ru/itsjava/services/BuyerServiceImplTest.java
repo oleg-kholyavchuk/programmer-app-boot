@@ -11,7 +11,9 @@ import ru.itsjava.domain.VeryNecessaryThing;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import static org.mockito.Mockito.when;
@@ -22,40 +24,22 @@ public class BuyerServiceImplTest {
     @Configuration
     static class MyConfiguration {
 
-        @Bean
-        public IOService ioService() {
-            IOService mockIOService = Mockito.mock(IOService.class);
-            when(mockIOService.input()).thenReturn(50);
-
-            return mockIOService;
-        }
-
-        @Bean
-        public VeryNecessaryThingService veryNecessaryThingService() {
-            //Тут вопросики
-            VeryNecessaryThing thing1 = new VeryNecessaryThing("'It'll do' ", "Average ", "Black ", 500);
-            VeryNecessaryThing thing2 = new VeryNecessaryThing("'It'll do' ", "Average ", "Black ", 50);
-            List<VeryNecessaryThing> thingsTemp = List.of(thing1, thing2);
-            return (VeryNecessaryThingService) thing1;
-        }
-
-        @Bean
-        public BuyerService buyerService(VeryNecessaryThingService veryNecessaryThingService, IOService ioService) {
-
-            return new BuyerServiceImpl(veryNecessaryThingService, ioService);
-        }
-
-        @Autowired
-        private BuyerService buyerService;
+        public final VeryNecessaryThingService veryNecessaryThingService = new VeryNecessaryThingServiceImpl();
+        private static final String string = "12";
+        private final InputStream inputStream = new ByteArrayInputStream(string.getBytes(StandardCharsets.UTF_8));
+        private final IOService ioService = new IOServiceImpl(inputStream);
+        private final BuyerService buyerService = new BuyerServiceImpl(veryNecessaryThingService, ioService);
 
         @Test
-        public void takeYourProductTest () {
+        public void takeYourProductTest() {
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             System.setOut(new PrintStream(out));
             buyerService.takeYourProduct();
 
-            Assertions.assertEquals("Hello. We are glad to see you!\n" + "Here are our products\n"
-                   + "Enter the exact amount of the product\n" + "50\n" + "Here is your product\n", out.toString() );
+            Assertions.assertEquals("Hello. We are glad to see you!\r\n" + "Here are our products\r\n" +"VeryNecessaryThing{Title: 'Super thing' Size: Big Color: Red Price : 100500}\r\n" +
+                   "VeryNecessaryThing{Title: 'So-so' Size: Little Color: Green Price : 100}\r\n"  + "VeryNecessaryThing{Title: 'It'll do' Size: Average Color: Black Price : 500}\r\n"  +
+                   "VeryNecessaryThing{Title: 'It'll do' Size: Average Color: Black Price : 50}\r\n" + "Enter the exact amount of the product\r\n" + "Here is your product\r\n", out.toString());
         }
     }
 }
+
