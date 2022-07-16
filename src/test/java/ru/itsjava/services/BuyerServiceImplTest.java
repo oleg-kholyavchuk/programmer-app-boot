@@ -25,7 +25,7 @@ public class BuyerServiceImplTest {
     static class MyConfiguration {
 
         public final VeryNecessaryThingService veryNecessaryThingService = new VeryNecessaryThingServiceImpl();
-        private static final String string = "12";
+        private static final String string = "50";
         private final InputStream inputStream = new ByteArrayInputStream(string.getBytes(StandardCharsets.UTF_8));
         private final IOService ioService = new IOServiceImpl(inputStream);
         private final BuyerService buyerService = new BuyerServiceImpl(veryNecessaryThingService, ioService);
@@ -38,7 +38,8 @@ public class BuyerServiceImplTest {
 
             Assertions.assertEquals("Hello. We are glad to see you!\r\n" + "Here are our products\r\n" +"VeryNecessaryThing{Title: 'Super thing' Size: Big Color: Red Price : 100500}\r\n" +
                    "VeryNecessaryThing{Title: 'So-so' Size: Little Color: Green Price : 100}\r\n"  + "VeryNecessaryThing{Title: 'It'll do' Size: Average Color: Black Price : 500}\r\n"  +
-                   "VeryNecessaryThing{Title: 'It'll do' Size: Average Color: Black Price : 50}\r\n" + "Enter the exact amount of the product\r\n" + "Here is your product\r\n", out.toString());
+                   "VeryNecessaryThing{Title: 'It'll do' Size: Average Color: Black Price : 50}\r\n" + "Enter the exact amount of the product\r\n" +
+                    "Here is your product\r\n" + "VeryNecessaryThing{Title: 'It'll do' Size: Average Color: Black Price : 50}\r\n", out.toString());
         }
     }
 }
