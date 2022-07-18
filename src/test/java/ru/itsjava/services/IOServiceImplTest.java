@@ -17,11 +17,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @DisplayName("Class IOServiceImpl")
 public class IOServiceImplTest {
 
+    private static final int NUM = 12;
+
     @Configuration
     static class MyConfiguration {
-        private static final int NUM = 12;
-        private static final String string = "12";
-        private final InputStream inputStream = new ByteArrayInputStream(string.getBytes(StandardCharsets.UTF_8));
+
+        private static final String PRICE = "12";
+        private final InputStream inputStream = new ByteArrayInputStream(PRICE.getBytes(StandardCharsets.UTF_8));
 
         @Bean
         public IOService ioService() {
@@ -35,7 +37,8 @@ public class IOServiceImplTest {
     @Test
     @DisplayName("correct work method Input")
     public void shouldHaveCorrectInput() {
-        assertEquals(MyConfiguration.NUM, ioService.input());
+
+        assertEquals(NUM, ioService.input());
 
     }
 }

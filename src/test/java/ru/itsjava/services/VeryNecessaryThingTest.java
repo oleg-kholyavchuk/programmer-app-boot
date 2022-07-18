@@ -15,6 +15,7 @@ public class VeryNecessaryThingTest {
     @Test
     public void shouldHaveCorrectMethodGetPrice() {
         VeryNecessaryThing thing1 = new VeryNecessaryThing("'Super thing' ", "Big ", "Red ", 10);
+
         Assertions.assertTrue(PRICE == thing1.getPrice());
     }
 }

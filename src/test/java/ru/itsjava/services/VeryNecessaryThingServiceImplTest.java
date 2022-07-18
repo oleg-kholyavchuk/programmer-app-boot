@@ -15,6 +15,7 @@ public class VeryNecessaryThingServiceImplTest {
         VeryNecessaryThing thing1 = new VeryNecessaryThing("'It'll do' ", "Average ", "Black ", 500);
         VeryNecessaryThing thing2 = new VeryNecessaryThing("'It'll do' ", "Average ", "Black ", 50);
         List<VeryNecessaryThing> thingsTemp = List.of(thing1, thing2);
+
         Assertions.assertTrue(thingsTemp.contains(thing1));
     }
 
@@ -23,7 +24,8 @@ public class VeryNecessaryThingServiceImplTest {
         VeryNecessaryThing thing1 = new VeryNecessaryThing("'It'll do' ", "Average ", "Black ", 500);
         VeryNecessaryThing thing2 = new VeryNecessaryThing("'It'll do' ", "Average ", "Black ", 50);
         List<VeryNecessaryThing> thingsTemp = List.of(thing1, thing2);
+
         Assertions.assertTrue(thingsTemp.contains(thing1));
-        Assertions.assertTrue(thing1.getPrice() == 500);
+        Assertions.assertEquals(thing1.getPrice(),500);
     }
 }
