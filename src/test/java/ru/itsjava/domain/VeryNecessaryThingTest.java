@@ -1,14 +1,10 @@
-package ru.itsjava.services;
+package ru.itsjava.domain;
 
-import lombok.RequiredArgsConstructor;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-import ru.itsjava.domain.VeryNecessaryThing;
 
-@SpringBootTest
-@RequiredArgsConstructor
+
 public class VeryNecessaryThingTest {
     private final static int PRICE = 10;
 
@@ -16,6 +12,6 @@ public class VeryNecessaryThingTest {
     public void shouldHaveCorrectMethodGetPrice() {
         VeryNecessaryThing thing1 = new VeryNecessaryThing("'Super thing' ", "Big ", "Red ", 10);
 
-        Assertions.assertTrue(PRICE == thing1.getPrice());
+        Assertions.assertEquals(PRICE,thing1.getPrice());
     }
 }
